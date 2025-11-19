@@ -17,6 +17,7 @@ import {
   seedDatabaseController,
   getDatabaseStats,
 } from "./controllers/adminController.js";
+import UserController from "./controllers/userController.js";
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -52,7 +53,7 @@ passport.deserializeUser((user, done) => {
 
 // routes
 app.use('/auth', router);
-app.use('/api', userRouter);
+app.use('/api/user', userRouter);
 
 // Basic health check
 app.get("/", (req, res) => {
@@ -71,12 +72,18 @@ app.get("/api/genres/:genre_id/movies", getMoviesByGenre);
 app.get("/api/movies", getAllMovies);
 app.get("/api/movies/:id", getMovieById);
 
+// User routes
+app.get("/api/users", UserController.getAllUsers);
+app.get("/api/user/:username", UserController.getUserByUsername)
+
 app.listen(PORT, () => {
-  console.log(`🚀 Server listening on http://localhost:${PORT}`);
-  console.log(`📊 API Endpoints:`);
-  console.log(`   GET /api/genres - Get all genres`);
-  console.log(`   GET /api/movies - Get movies (with pagination & filtering)`);
-  console.log(`   GET /api/movies/:id - Get specific movie`);
-  console.log(`   GET /api/genres/:id/movies - Get movies by genre`);
-  console.log(`   GET /api/stats - Database statistics`);
+    console.log(`🚀 Server listening on http://localhost:${PORT}`);
+    console.log(`📊 API Endpoints:`);
+    console.log(`   GET /api/genres - Get all genres`);
+    console.log(`   GET /api/movies - Get movies (with pagination & filtering)`);
+    console.log(`   GET /api/movies/:id - Get specific movie`);
+    console.log(`   GET /api/genres/:id/movies - Get movies by genre`);
+    console.log(`   GET /api/stats - Database statistics`);
+    console.log(`   GET /api/users - All users information`)
+    console.log(`   GET /api/user - Get specific user information`)
 });

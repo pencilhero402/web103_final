@@ -98,16 +98,16 @@ export const getAllMovies = async (req, res) => {
 // Get a specific movie by ID with its genres
 export const getMovieById = async (req, res) => {
   try {
-    const { id } = req.params;
+    const id  = parseInt(req.params.id, 10);
 
     const result = await pool.query(
       `
       SELECT m.*, 
              array_agg(DISTINCT g.name) as genres,
              array_agg(DISTINCT g.id) as genre_ids
-      FROM Movies m
-      LEFT JOIN Movie_Genres mg ON m.id = mg.movie_id
-      LEFT JOIN Genres g ON mg.genre_id = g.id
+      FROM movies m
+      LEFT JOIN movie_genres mg ON m.id = mg.movie_id
+      LEFT JOIN genres g ON mg.genre_id = g.id
       WHERE m.id = $1
       GROUP BY m.id
     `,

@@ -31,7 +31,7 @@ function Header({ api_url, user, logout }) {
                 </Link>
                 {/* Login & Logout Conditional */}
                 {user ? (<>
-                        <p> {user.username} </p>
+                        <Link to={`/${user.username}`}> {user.username} </Link>
                         <button className="bg-gray-800 hover:bg-gray-700 text-white px-6 py-2 rounded-md text-sm font-medium transition-colors" onClick={logout}>Logout</button>
                     </>
                     ) : (
