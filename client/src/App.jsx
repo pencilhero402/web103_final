@@ -1,8 +1,9 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import MoviesPage from './pages/MoviesPage';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import MoviesPage from "./pages/MoviesPage";
+import MovieDetailPage from "./pages/MovieDetailPage";
+import "./App.css";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           <Routes>
             <Route path="/" element={<MoviesPage />} />
             <Route path="/movies" element={<MoviesPage />} />
+            <Route path="/movie/:id" element={<MovieDetailPage />} />
           </Routes>
         </main>
         <Footer />
