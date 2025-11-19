@@ -1,35 +1,50 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState, useEffect } from 'react';
+import { useRoutes } from 'react-router-dom';  // Use react-router for routing
+import './App.css';
+import Login from './pages/Login.jsx';
 
-function App() {
-  const [count, setCount] = useState(0)
+const API_URL = 'http://localhost:3000';
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+const App = () => {
+    const [user, setUser] = useState(null);
 
-export default App
+    const getUser = async () => {
+        const response = await fetch(`${API_URL}/auth/login/success`, { credentials: 'include' });
+        const json = await response.json();
+        setUser(json.user);
+    };
+
+    const logout = async () => {
+        const url = `${API_URL}/auth/logout`;
+        const response = await fetch(url, { credentials: 'include' });
+        const json = await response.json();
+        window.location.href = '/';  
+    };
+
+    useEffect(() => {
+        getUser();
+    }, []);
+
+    let element = useRoutes([
+        {
+            path: '/',
+            element: user ? (
+                <div>
+                    <h1>Welcome, {user.name}</h1>
+                    <button onClick={logout}>Logout</button>
+                </div>
+            ) : (
+                <Login api_url={API_URL} /> 
+            ),
+        },
+    ]);
+
+    return (
+        <div className='app'>
+            <h1>HELLO</h1>
+            {element}
+        </div>
+    );
+};
+
+export default App;
