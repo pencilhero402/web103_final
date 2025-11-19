@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 import "./config/dotenv.js";
 
 // Import controllers
@@ -16,6 +17,12 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 // Middleware
+app.use(
+  cors({
+    origin: ["http://localhost:5173", "http://localhost:3000"], // Allow Vite dev server
+    credentials: true,
+  })
+);
 app.use(express.json());
 
 // Basic health check
