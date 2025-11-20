@@ -2,7 +2,7 @@
 
 CodePath WEB103 Final Project
 
-Designed and developed by: Alameen Adeku, Axin Li
+Designed and developed by: Alameen Adeku, Axin Li, Helen Tran
 
 🔗 Link to deployed app:
 
@@ -32,24 +32,24 @@ These are the core features available to all users for browsing and discovering 
 
 - [x] Search Functionality: A site-wide search bar allows users to quickly find any movie in the database by its title.
 
-  - _gif goes here_
+  - [_gif goes here_](https://imgur.com/a/H7FwwxE)
 
 - Robust Filtering & Sorting: On the main "Browse" page, users can refine their search based by:
 
   - [x] Filter by Genre: Narrow the list to specific genres (e.g., "Horror," "Sci-Fi," "Comedy").
-    - _gif goes here_
+    - [_gif goes here_](https://imgur.com/a/H7FwwxE)
   - [x] Filter by Release Year: Focus on films from a specific decade or year.
-    - _gif goes here_
+    - [_gif goes here_](https://imgur.com/a/H7FwwxE)
   - [x] Sort by: Organize the entire catalog by "Highest Rated," "Most Popular" (based on how many users have it on their watchlist), or "Newest."
-    - _gif goes here_
+    - [_gif goes here_](https://imgur.com/a/H7FwwxE)
 
 - [x] Dynamic Movie Detail Pages: Each movie has its own dedicated, dynamically-routed page that aggregates all user-generated data.
 
-  - _gif goes here_
+  - [_gif goes here_](https://imgur.com/a/n32Keb6)
 
-- [ ] Average Community Rating: The page displays a prominent average star rating, calculated from all user-submitted ratings on the platform.
+- [x] Average Community Rating: The page displays a prominent average star rating, calculated from all user-submitted ratings on the platform.
 
-  - _gif goes here_
+  - [_gif goes here_](https://imgur.com/a/n32Keb6)
 
 - [ ] Recent Reviews Feed: A feed shows the most recent reviews for that movie, submitted by other SceneIt users.
   - _gif goes here_
@@ -58,11 +58,11 @@ These are the core features available to all users for browsing and discovering 
 
 These features are centered around the logged-in user, allowing them to build a personal movie-tracking profile.
 
-- [ ] Public User Profiles: Every user has a personal, public profile page that acts as their film-tracking homepage. This page showcases:
+- [x] Public User Profiles: Every user has a personal, public profile page that acts as their film-tracking homepage. This page showcases:
 
-  - _gif goes here_
-  - [ ] Personalized Statistics: The profile dashboard displays key stats, such as "Total Movies Watched" and "Favorite Genre" (calculated from their ratings).
-    - _gif goes here_
+  - [_gif goes here_](https://imgur.com/a/Ua4c4va)
+  - [x] Personalized Statistics: The profile dashboard displays key stats, such as "Total Movies Watched" and "Favorite Genre" (calculated from their ratings).
+    - [_gif goes here_](https://imgur.com/a/Ua4c4va)
   - [ ] Activity Feeds: The profile showcases the user's "Recently Watched" activity, as well as a customizable "Top 5 Favorite Movies" list to share their top picks with the community.
     - _gif goes here_
 
