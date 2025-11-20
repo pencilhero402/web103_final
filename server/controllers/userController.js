@@ -157,6 +157,41 @@ const UserController = {
         }
     },
 
+    updateUserWatchlist: async(req, res) => {
+        try {
+            const { username, movie_id } = req.params;
+            const {status } = req.body;
+
+            if (!status) {
+                return res.status(400).json({
+                    success: false, 
+                error: "Status is required" 
+                });
+            }
+            const result = await pool.query(
+                `UPDATE user_movie_shelf
+                SET status = $1
+                WHERE user_id = (SELECT githubid FROM users WHERE username = $2)
+                AND movie_id = $3
+                RETURNING *`,
+                [status, username, movie_id]
+            );
+            if (results.rows.length === 0) {
+                return res.status(404).json({
+                    success: false,
+                    error: "User not found",
+                });
+            }
+            res.json({
+                success: true,
+                data: results.rows,
+            });
+        } catch (error) {
+            res.status(409).json( { error: error.message })
+            console.log('🚫 unable to PATCH user watchlist  - Error:', error.message)
+        }
+    },
+
     getAllWatchlist: async(req, res) => {
         try {
             const results = await pool.query(`

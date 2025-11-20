@@ -197,18 +197,37 @@ function UserPage () {
                 <h1 className="text-2xl font-semibold text-gray-800">Watchlist:</h1>
                 <ul className="flex flex-row">
                     {Array.isArray(watchlist) && watchlist.length > 0 ? (
-                        watchlist.map((item) => (
+                        watchlist
+                        .filter((item) => item.status.toLowerCase() === "not watched")
+                        .map((item) => (
                             <li key={item.id} className="w-80">
-                                {item.movie ? (
-                                    <>
-                                        <MovieCard movie={item.movie} />
-                                        <p className="mt-2 text-gray-700 font-medium">
-                                            Status: {item.status}
-                                        </p>
-                                    </>
-                                ) : (
-                                    <p>Loading movie...</p>
-                                )}
+                            {item.movie ? (
+                                <MovieCard movie={item.movie} status={item.status} />
+                            ) : (
+                                <p>Loading movie...</p>
+                            )}
+                            </li>
+                        ))
+                    ) : (
+                        <p>No movies in watchlist yet.</p>
+                    )}
+                </ul>
+            </div>
+
+            {/* User's Watched Movies */}
+            <div className="p-4">
+                <h1 className="text-2xl font-semibold text-gray-800">Watched:</h1>
+                <ul className="flex flex-row">
+                    {Array.isArray(watchlist) && watchlist.length > 0 ? (
+                        watchlist
+                        .filter((item) => item.status.toLowerCase() === "watched")
+                        .map((item) => (
+                            <li key={item.id} className="w-80">
+                            {item.movie ? (
+                                <MovieCard movie={item.movie} status={item.status} />
+                            ) : (
+                                <p>Loading movie...</p>
+                            )}
                             </li>
                         ))
                     ) : (

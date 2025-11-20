@@ -1,6 +1,7 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
-function MovieCard({ movie, rating }) {
+function MovieCard({ movie, rating, status: initialStatus, onStatusChange }) {
   // Build TMDB image URL
   const buildImageURL = (path, size = "w500") => {
     if (!path) return "/placeholder-movie.svg";
@@ -27,11 +28,24 @@ function MovieCard({ movie, rating }) {
     return rating ? parseFloat(rating).toFixed(1) : "N/A";
   };
 
+    const [status, setStatus] = useState(initialStatus || "Not watched");
+
+    const handleStatusChange = async (newStatus) => {
+        setStatus(newStatus);
+        if (onStatusChange) {
+            onStatusChange(movie.id, newStatus)
+        }
+    }
+
+    const formatStatus =(status) => {
+    return status || "N/A";
+    }
+
   return (
-    <Link to={`/movie/${movie.id}`} className="block">
       <div className="bg-white rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow duration-300 overflow-hidden group cursor-pointer">
         {/* Movie Poster */}
         <div className="aspect-[2/3] bg-gray-100 relative overflow-hidden">
+        <Link to={`/movie/${movie.id}`} className="block">
           <img
             src={buildImageURL(movie.img_path)}
             alt={movie.title}
@@ -40,6 +54,7 @@ function MovieCard({ movie, rating }) {
               e.target.src = "/placeholder-movie.svg";
             }}
           />
+        </Link>
 
           {/* Rating Badge */}
           {movie.external_avg_rating && (
@@ -87,9 +102,25 @@ function MovieCard({ movie, rating }) {
         {/* Your rating */}
         {rating && (
             <div className="flex justify-between items-center text-sm text-gray-600">
-            <span className="font-medium">Your Rating</span>
-            <span>{formatRating(rating)}</span>
-        </div>
+                <span className="font-medium">Your Rating</span>
+                <span>{formatRating(rating)}</span>
+            </div>
+        )}
+
+        {/* Status */}
+        {status && (
+            <div className="flex justify-between items-center text-sm text-gray-600">
+                <span className="font-medium">Status: </span>
+                <select
+                    value={status}
+                    onChange={handleStatusChange}
+                    className="rounded px-2 py-1 text-xs"
+                    >
+                    <option value="Not watched">🔵 Not watched</option>
+                    <option value="Watching">🟡 Watching</option>
+                    <option value="Watched">🟢 Watched</option>
+                </select>
+            </div>
         )}
 
           {movie.release_date && (
@@ -100,7 +131,6 @@ function MovieCard({ movie, rating }) {
           )}
         </div>
       </div>
-    </Link>
   );
 }
 
